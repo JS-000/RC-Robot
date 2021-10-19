@@ -2,10 +2,10 @@
 
 using namespace std;
 
-void moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string instructions)
+bool moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string instructions)
 {
     int d;
-    switch(rDir)
+    switch(rDir)                        //Change direction character to integer
     {
         case 'N': 
             d = 0;
@@ -22,16 +22,19 @@ void moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string in
     }
     for(int i = 0; i < instructions.length(); i++)
     {
-        if(instructions[i] == 'M')
+        if(instructions[i] == 'M')      //Move
         {
             if(d == 0) rPos.second++;
             else if(d == 1) rPos.first++;
             else if(d == 2) rPos.second--;
             else rPos.first--;
+            
+            if(rPos.first > grid.first || rPos.first < 0 || rPos.second > grid.second || rPos.second < 0)
+                return false;
         }
-        else if(instructions[i] == 'L')
+        else if(instructions[i] == 'L') //Rotate Left
             d = (d + 3) % 4;
-        else
+        else                            //Rotate Right
             d = (d + 1) % 4;
     }
     switch(d)
@@ -49,6 +52,7 @@ void moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string in
             rDir = 'W';
             break;
     }
+    return true;
 }
 
 int main() 
@@ -61,7 +65,9 @@ int main()
     cin>>rDir;
     string instructions;
     cin>>instructions;
-    moveRobot(grid, rPos, rDir, instructions);
-    cout<<rPos.first<<" "<<rPos.second<<" "<<rDir;
+    if(moveRobot(grid, rPos, rDir, instructions))
+        cout<<rPos.first<<" "<<rPos.second<<" "<<rDir;
+    else
+        cout<<"Invalid Instruction Sequemce";
     return 0;
 }
