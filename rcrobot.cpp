@@ -2,24 +2,12 @@
 
 using namespace std;
 
+string compass = "NESW";
+
 bool moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string instructions)
 {
-    int d;
-    switch(rDir)                        //Change direction character to integer
-    {
-        case 'N': 
-            d = 0;
-            break;
-        case 'E':
-            d = 1;
-            break;
-        case 'S':
-            d = 2;
-            break;
-        case 'W':
-            d = 3;
-            break;
-    }
+    int d = compass.find(rDir);                        //Change direction from character to integer
+    
     for(int i = 0; i < instructions.length(); i++)
     {
         if(instructions[i] == 'M')      //Move
@@ -37,21 +25,7 @@ bool moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string in
         else                            //Rotate Right
             d = (d + 1) % 4;
     }
-    switch(d)
-    {
-        case 0: 
-            rDir = 'N';
-            break;
-        case 1:
-            rDir = 'E';
-            break;
-        case 2:
-            rDir = 'S';
-            break;
-        case 3:
-            rDir = 'W';
-            break;
-    }
+    rDir = compass[d];  //Changing direction from integer to character
     return true;
 }
 
