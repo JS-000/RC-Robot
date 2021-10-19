@@ -26,7 +26,7 @@ void moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string in
         {
             if(d == 0) rPos.second++;
             else if(d == 1) rPos.first++;
-            else if(d == 1) rPos.second--;
+            else if(d == 2) rPos.second--;
             else rPos.first--;
         }
         else if(instructions[i] == 'L')
