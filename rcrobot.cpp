@@ -17,7 +17,7 @@ bool moveRobot(pair<int, int>& grid, pair<int, int>& rPos, char& rDir, string in
             else if(d == 2) rPos.second--;
             else rPos.first--;
             
-            if(rPos.first > grid.first || rPos.first < 0 || rPos.second > grid.second || rPos.second < 0)
+            if(rPos.first > grid.first || rPos.first < 0 || rPos.second > grid.second || rPos.second < 0)   //Check if instrctions result in moving out of grid
                 return false;
         }
         else if(instructions[i] == 'L') //Rotate Left
@@ -33,13 +33,13 @@ int main()
 {
     pair<int, int> grid;
     cin>>grid.first>>grid.second;
-    pair<int, int> rPos;   //Program runs for 1 robot at a time, input does not mention no. of robots.
+    pair<int, int> rPos;        //Program runs for 1 robot at a time, input does not mention no. of robots.
     cin>>rPos.first>>rPos.second;
     char rDir;
     cin>>rDir;
     string instructions;
     cin>>instructions;
-    if(moveRobot(grid, rPos, rDir, instructions))
+    if(moveRobot(grid, rPos, rDir, instructions))   //if input sequence is valid
         cout<<rPos.first<<" "<<rPos.second<<" "<<rDir;
     else
         cout<<"Invalid Instruction Sequemce";
